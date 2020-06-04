@@ -1,0 +1,96 @@
+POST {{protocol}}://{{UserApi_URL}}/search
+Body
+
+}
+    "take": 4,
+}
+
+
+GET {{protocol}}://{{UserApi_URL}}/Users/{{User_ID}}
+Test
+
+//Setting Variables for First Response
+var jsonData = pm.response.json();
+var firstEntry = jsonData[0];
+pm.environment.set("User_ID", firstEntry.User_ID);
+pm.environment.set("StampNumber", firstEntry.StampNumber);
+pm.environment.set("CardNumber", firstEntry.CardNumber);
+pm.environment.set("Promotions", firstEntry.Promotions);
+
+//Setting Variables for Second Response
+var secondEntry = jsonData[1];
+pm.environment.set("User_ID", secondEntry.User_ID);
+pm.environment.set("StampNumber", secondEntry.StampNumber);
+pm.environment.set("CardNumber", secondEntry.CardNumber);
+pm.environment.set("Promotions", secondEntry.Promotions);
+
+//Setting Variables for Third Response
+var thirdEntry = jsonData[2];
+pm.environment.set("User_ID", thirdEntry.User_ID);
+pm.environment.set("StampNumber", thirdEntry.StampNumber);
+pm.environment.set("CardNumber", thirdEntry.CardNumber);
+pm.environment.set("Promotions", thirdEntry.Promotions);
+
+//Setting Variables for Fourth Response
+var fourthEntry = jsonData[2];
+pm.environment.set("User_ID", fourthEntry.User_ID);
+pm.environment.set("StampNumber", fourthEntry.StampNumber);
+pm.environment.set("CardNumber", fourthEntry.CardNumber);
+pm.environment.set("Promotions", fourthEntry.Promotions);
+
+//Checking response of API
+pm.test("Status test", function () {
+    pm.response.to.have.status(200);
+});
+
+//Checking if there is data available for testing
+pm.test("InvulHulp list is not empty", function () {
+    pm.expect(jsonData).to.be.an('array').that.is.not.empty;
+});
+
+//Checking if User-ID is conform to requirements
+pm.test("Testing if User_ID has required size", function () {
+    pm.expect(firstEntry.User_ID).to.have.lengthOf(x);
+    pm.expect(secondEntry.User_ID).to.have.lengthOf(x);
+    pm.expect(thirdEntry.User_ID).to.have.lengthOf(x);
+    pm.expect(fourthEntry.User_ID).to.have.lengthOf(x);
+});
+
+//Checking when Stamps are available, a Numver is displayed
+pm.test("Testing if the user has stamps, a number is displayed", function () {
+    if (pm.expect(firstEntry.StampNumber).to.not.be.empty) {
+        pm.expect(firstEntry.StampNumber).to.be.a('string');
+    if (pm.expect(secondEntry.StampNumber).to.not.be.empty) {
+        pm.expect(secondEntry.StampNumber).to.be.a('string');
+    if (pm.expect(thirdEntry.StampNumber).to.not.be.empty) {
+        pm.expect(thirdEntry.StampNumber).to.be.a('string');
+    if (pm.expect(firstEntry.StampNumber).to.not.be.empty) {
+        pm.expect(fourthEntry.StampNumber).to.be.a('string');
+    }
+});
+
+//Checking when the User has Cards, a number is displayed
+pm.test("Testing if the user has Cards, a number is displayed", function () {
+    if (pm.expect(firstEntry.CardNumber).to.not.be.empty) {
+        pm.expect(firstEntry.CardNumber).to.be.a('string');
+    if (pm.expect(secondEntry.CardNumber).to.not.be.empty) {
+        pm.expect(secondEntry.CardNumber).to.be.a('string');
+    if (pm.expect(thirdEntry.CardNumber).to.not.be.empty) {
+        pm.expect(thirdEntry.CardNumber).to.be.a('string');
+    if (pm.expect(fourthEntry.CardNumber).to.not.be.empty) {
+        pm.expect(fourthEntry.CardNumber).to.be.a('string');
+    }
+});
+
+//Checking if the user has promotions, promotions isn't empty
+pm.test("Testing if the user has Promotions, there are Promotions", function () {
+    if (pm.expect(firstEntry.CardNumber).to.not.be.empty) {
+        pm.expect(firstEntry.CardNumber).to.not.be.empty);
+    if (pm.expect(secondEntry.CardNumber).to.not.be.empty) {
+        pm.expect(secondEntry.CardNumber).to.not.be.empty);
+    if (pm.expect(thirdEntry.CardNumber).to.not.be.empty) {
+        pm.expect(thirdEntry.CardNumber).to.not.be.empty);
+    if (pm.expect(fourthEntry.CardNumber).to.not.be.empty) {
+        pm.expect(fourthEntry.CardNumber).to.not.be.empty);
+    }
+});
